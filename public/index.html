@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Проверка браузера</title>
+  </head>
+  <body>
+    <h1 class="link-text-h1" id="text-input-link">Введите ссылку</h1>
+    <input name="Thing" value="" type="text" onchange='' id='link-text-input'
+    class="link-text-input" onchange=/>
+    <h2 class="text_output" id="text_output"></h2>
+  </body>
+  <script>
+ var getLocation = function(href) {
+    var l = document.createElement("a");
+    l.href = href;
+    return l;
+};
+    var l = getLocation(document.documentURI);
+    if(l.pathname != '/'){
+      console.log(window.navigator.userAgent);
+    } 
+
+    document.addEventListener("keydown", function (event) {
+      if (event.code == "KeyZ") {
+        document.getElementById("text-input-link").style.visibility = "visible";
+        document.getElementById("link-text-input").style.visibility = "visible";
+        document.getElementById("text_output").style.visibility = "visible";
+      }
+
+      document
+        .getElementsByName("Thing")[0]
+        .addEventListener("change", doThing);
+      function doThing() {
+        document.getElementById("text_output").innerHTML =
+          document.URL + "/" + btoa(this.value);
+
+        //   btoa("category=textile&user=user1")
+        // atob("Y2F0ZWdvcnk9dGV4dGlsZSZ1c2VyPXVzZXIx")
+      }
+    });
+  </script>
+
+  <style>
+    input[type="text"] {
+      padding: 10px;
+      visibility: hidden;
+    }
+    .border-customized-input {
+      border: 2px solid #eee;
+    }
+    .link-text-h1 {
+      visibility: hidden;
+    }
+    .text_output {
+      visibility: hidden;
+    }
+  </style>
+</html>
